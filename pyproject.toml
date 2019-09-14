@@ -16,5 +16,6 @@ keras = "^2.2"
 image = "^1.5"
 scikit-image = "^0.15.0"
 Flask = "^1.1"
+opencv-python = "^4.1"
 
 [tool.poetry.dev-dependencies]
