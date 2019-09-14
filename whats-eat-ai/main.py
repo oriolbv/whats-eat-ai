@@ -11,9 +11,13 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
+import cv2
+
+INPUT_SHAPE_X = 64
+INPUT_SHAPE_Y = 64
 
 dirname = os.path.join(os.getcwd(), 'whats-eat-ai\img')
-imgpath = dirname + os.sep 
+imgpath = dirname + os.sep
  
 images = []
 directories = []
@@ -28,7 +32,9 @@ for root, dirnames, filenames in os.walk(imgpath):
         if re.search("\.(jpg|jpeg|png|bmp|tiff)$", filename):
             cant = cant + 1
             filepath = os.path.join(root, filename)
-            image = plt.imread(filepath)
+            image = cv2.imread(filepath)
+            (b, g, r)=cv2.split(image)
+            image=cv2.merge([r,g,b])
             images.append(image)
             b = "Reading..." + str(cant)
             print (b, end="\r")
@@ -62,7 +68,7 @@ for directory in directories:
     food.append(name[len(name)-1])
     idx=idx+1
 
-print("images: ", images)
+# print("images: ", images) bread pudding
 
 y = np.array(labels)
 X = np.array(images, dtype=np.uint8)
@@ -101,7 +107,7 @@ epochs = 6
 batch_size = 64
 
 food_model = Sequential()
-food_model.add(Conv2D(32, kernel_size=(3, 3),activation='linear',padding='same',input_shape=(80,106,3)))
+food_model.add(Conv2D(32, kernel_size=(3, 3),activation='linear',padding='same',input_shape=(INPUT_SHAPE_X,INPUT_SHAPE_Y,3)))
 food_model.add(LeakyReLU(alpha=0.1))
 food_model.add(MaxPooling2D((2, 2),padding='same'))
 food_model.add(Dropout(0.5))
