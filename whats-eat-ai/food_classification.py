@@ -20,7 +20,7 @@ app = Flask(__name__)
 def classify():
     classes = [ 'apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad',
                 'beignets', 'bibimbap', 'bread_pudding', 'breakfast_burrito']
-    model = load_model('food_mnist.h5py')
+    model = load_model('food_mnist_64_64.h5py')
     images=[]
     filenames = ['img_carpaccio.jpg','img_apple_pie.jpg']
     for filepath in filenames:
