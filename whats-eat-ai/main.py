@@ -13,8 +13,8 @@ from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 import cv2
 
-INPUT_SHAPE_X = 64
-INPUT_SHAPE_Y = 64
+INPUT_SHAPE_X = 256
+INPUT_SHAPE_Y = 256
 
 dirname = os.path.join(os.getcwd(), 'whats-eat-ai\img')
 imgpath = dirname + os.sep
@@ -125,7 +125,7 @@ food_model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.o
 sport_train_dropout = food_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
 
 # Save model
-food_model.save("food_mnist.h5py")
+food_model.save("food_mnist_256_256.h5py")
 
 test_eval = food_model.evaluate(test_X, test_Y_one_hot, verbose=1)
 
